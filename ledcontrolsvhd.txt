@@ -1,0 +1,58 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 14.06.2022 14:39:42
+-- Design Name: 
+-- Module Name: Blink_Leds - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity Blink_Leds is
+    Port ( CLK : in STD_LOGIC;
+           LED : out STD_LOGIC_VECTOR (3 downto 0));
+end Blink_Leds;
+
+architecture Behavioral of Blink_Leds is
+signal  pulse: std_logic:='0';
+signal  count : integer range 0 to 99999999:=0;
+
+begin
+
+counter:process(CLK)
+
+begin
+ if CLK'event and CLK='1' then
+  if count=99999999 then
+ count <=0;
+ pulse <= not pulse;
+   else
+ count <= count+1;
+  end if;
+ end if;
+end process;
+LED(3 downto 0) <= (others =>pulse);
+end Behavioral;
